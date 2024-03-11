@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">fintech-l2</string>
+    <string name="tvResult" />
+    <string name="btnCalculateText">Calculate</string>
+    <string name="txtInputText" />
+    <string name="txtInputHint">Enter text</string>
+</resources>
