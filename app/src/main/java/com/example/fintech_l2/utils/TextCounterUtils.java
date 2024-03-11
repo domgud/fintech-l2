@@ -20,12 +20,16 @@ public class TextCounterUtils {
     }
 
     public static int calculateWords(String input) throws LengthCalculationException{
-        // split by whitespace
+
         try {
-            return input.split("\\s+").length;
+            String trimmedInput = input.trim();
+            if (trimmedInput.isEmpty()){
+                return 0;
+            }
+            return trimmedInput.split("\\s+").length;
         }
         catch (Throwable cause){
-            throw new LengthCalculationException("An error occured while trying to calculate words count",
+            throw new LengthCalculationException("An error occurred while trying to calculate words count",
                     cause);
         }
 
