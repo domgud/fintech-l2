@@ -12,6 +12,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fintech_l2.utils.TextCounterUtils;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button calculateButton;
@@ -46,18 +48,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void buttonOnClickCalculate(){
-        boolean validationPassed = validateButtonInput();
+        String strInput = inputText.getText().toString();
+        boolean validationPassed = validateButtonInput(strInput);
         if (!validationPassed){
             return;
         }
-        
+        // using enums here would prob be nicer
+        // strategy pattern could work too for more complex code
+        String calculationMethod = choicesSpinner.getSelectedItem().toString();
+        if (calculationMethod.equalsIgnoreCase("CHARS")){
+            resultText.setText(getString(R.string.total_characters_output, TextCounterUtils.calculateChars(strInput)));
+        }
     }
 
     /**
      * @return true if validation passed, false otherwise
      */
-    private boolean validateButtonInput(){
-        String strInput = inputText.getText().toString();
+    private boolean validateButtonInput(String strInput){
         if(TextUtils.isEmpty(strInput)) {
             inputText.setError(getString(R.string.empty_input));
             Toast.makeText(this, getString(R.string.empty_input), Toast.LENGTH_SHORT).show();

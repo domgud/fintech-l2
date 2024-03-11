@@ -5,6 +5,7 @@
     <string name="txtInputText" />
     <string name="txtInputHint">Enter text</string>
     <string name="empty_input">Input can\'t be empty</string>
+    <string name="total_characters_output">Total characters %1$d</string>
     <string-array name="calculation_choices_array">
         <item>Chars</item>
         <item>Words</item>
