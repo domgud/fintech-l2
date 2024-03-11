@@ -57,7 +57,16 @@ public class MainActivity extends AppCompatActivity {
         // strategy pattern could work too for more complex code
         String calculationMethod = choicesSpinner.getSelectedItem().toString();
         if (calculationMethod.equalsIgnoreCase("CHARS")){
-            resultText.setText(getString(R.string.total_characters_output, TextCounterUtils.calculateChars(strInput)));
+            resultText.setText(getString(R.string.total_characters_output,
+                    TextCounterUtils.calculateChars(strInput)));
+        }
+        else if (calculationMethod.equalsIgnoreCase("WORDS")){
+            resultText.setText(getString(R.string.total_words_output,
+                    TextCounterUtils.calculateWords(strInput)));
+        }
+        else {
+            Toast.makeText(this, getString(R.string.calculation_method_bad_input),
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
