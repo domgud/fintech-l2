@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fintech_l2.exception.LengthCalculationException;
 import com.example.fintech_l2.utils.TextCounterUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -57,12 +58,25 @@ public class MainActivity extends AppCompatActivity {
         // strategy pattern could work too for more complex code
         String calculationMethod = choicesSpinner.getSelectedItem().toString();
         if (calculationMethod.equalsIgnoreCase("CHARS")){
-            resultText.setText(getString(R.string.total_characters_output,
-                    TextCounterUtils.calculateChars(strInput)));
+            // could use one try/catch block, but with this implementation we allow more control
+            // to have different actions if needed on failure
+            try {
+                resultText.setText(getString(R.string.total_characters_output,
+                        TextCounterUtils.calculateChars(strInput)));
+            }
+            catch (LengthCalculationException e){
+                resultText.setText(e.getMessage());
+            }
+
         }
         else if (calculationMethod.equalsIgnoreCase("WORDS")){
-            resultText.setText(getString(R.string.total_words_output,
-                    TextCounterUtils.calculateWords(strInput)));
+            try {
+                resultText.setText(getString(R.string.total_words_output,
+                        TextCounterUtils.calculateWords(strInput)));
+            }
+            catch (LengthCalculationException e){
+                resultText.setText(e.getMessage());
+            }
         }
         else {
             Toast.makeText(this, getString(R.string.calculation_method_bad_input),
